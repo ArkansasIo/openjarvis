@@ -69,8 +69,6 @@ jobs:
           GITHUB_PAGES: "true"
         run: npm run build
 
-      # Inject the public Supabase anon key so the savings leaderboard works on
-      # the published docs site. Missing/empty leaves it gracefully disabled.
       - name: Inject leaderboard Supabase anon key
         env:
           OPENJARVIS_LEADERBOARD_ANON: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
@@ -94,12 +92,6 @@ jobs:
         run: |
           mkdir -p site/app
           cp -R src/openjarvis/server/static/. site/app/
-          cp site/app/index.html site/404.html
-          cat > site/app/config.js <<'EOF'
-          window.OPENJARVIS_PAGES_CONFIG = {
-            apiUrl: window.localStorage.getItem('openjarvis-api-url') || ''
-          };
-          EOF
 
       - name: Upload artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
