@@ -2,7 +2,7 @@
 import './lib/polyfills';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, HashRouter } from 'react-router';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import App from './App';
 import { initApiBase } from './lib/api';
@@ -26,7 +26,9 @@ function applyTheme() {
 
 applyTheme();
 
-const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+const isGitHubPages = import.meta.env.BASE_URL === '/openjarvis/app/';
+const Router = isGitHubPages ? HashRouter : BrowserRouter;
+const routerProps = isGitHubPages ? {} : { basename: import.meta.env.BASE_URL.replace(/\/$/, '') || '/' };
 
 initApiBase().finally(() => {
   void initAnalytics();
@@ -34,9 +36,9 @@ initApiBase().finally(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <ErrorBoundary>
-        <BrowserRouter basename={routerBasename}>
+        <Router {...routerProps}>
           <App />
-        </BrowserRouter>
+        </Router>
       </ErrorBoundary>
     </StrictMode>,
   );
