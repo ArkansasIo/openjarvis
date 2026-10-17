@@ -7,12 +7,16 @@ on:
       - "docs/**"
       - "mkdocs.yml"
       - "src/openjarvis/**"
+      - "frontend/**"
+      - ".github/workflows/docs.yml"
   pull_request:
     branches: [main]
     paths:
       - "docs/**"
       - "mkdocs.yml"
       - "src/openjarvis/**"
+      - "frontend/**"
+      - ".github/workflows/docs.yml"
   workflow_dispatch:
 
 permissions:
@@ -26,6 +30,7 @@ concurrency:
 
 env:
   PYTHON_VERSION: "3.12"
+  NODE_VERSION: "22"
 
 jobs:
   build:
@@ -38,19 +43,32 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Install uv
         uses: astral-sh/setup-uv@v10.2.0
 
-      - name: Install dependencies
+      - name: Install documentation dependencies
         run: uv sync --extra docs
 
-      # Inject the public Supabase anon key so the savings leaderboard works on
-      # the published docs site. Missing/empty (e.g. fork PRs) leaves the
-      # leaderboard gracefully disabled. The key is read from env (not inlined)
-      # and JSON-encoded into a JS string literal to avoid any injection.
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build full web application
+        working-directory: frontend
+        env:
+          GITHUB_PAGES: "true"
+        run: npm run build
+
       - name: Inject leaderboard Supabase anon key
         env:
           OPENJARVIS_LEADERBOARD_ANON: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
@@ -69,6 +87,11 @@ jobs:
 
       - name: Build documentation
         run: uv run mkdocs build
+
+      - name: Add full web application to Pages artifact
+        run: |
+          mkdir -p site/app
+          cp -R src/openjarvis/server/static/. site/app/
 
       - name: Upload artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
