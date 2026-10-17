@@ -1,9 +1,9 @@
 site_name: OpenJarvis
-site_url: https://open-jarvis.github.io/OpenJarvis/
+site_url: https://arkansasio.github.io/openjarvis/
 site_description: Personal AI, On Personal Devices
 site_author: OpenJarvis Contributors
-repo_url: https://github.com/open-jarvis/OpenJarvis
-repo_name: open-jarvis/OpenJarvis
+repo_url: https://github.com/ArkansasIo/openjarvis
+repo_name: ArkansasIo/openjarvis
 edit_uri: edit/main/docs/
 
 copyright: Copyright &copy; 2026 OpenJarvis Contributors
@@ -136,12 +136,12 @@ extra:
   version:
     default: v1.0.0
   algolia:
-    app_id: ""       # Fill after DocSearch approval
-    api_key: ""      # Search-only key
-    index_name: ""   # e.g. "openjarvis"
+    app_id: ""
+    api_key: ""
+    index_name: ""
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/open-jarvis/OpenJarvis
+      link: https://github.com/ArkansasIo/openjarvis
 
 nav:
   - Home: index.md
@@ -181,7 +181,6 @@ nav:
       - Pearl CLI: user-guide/pearl.md
       - Pearl Mining: user-guide/mining.md
       - Pearl Mining on Apple Silicon: user-guide/mining-apple-silicon.md
-      - Python SDK: user-guide/python-sdk.md
       - Morning Digest: user-guide/morning-digest.md
       - Deep Research: user-guide/deep-research.md
       - Code Assistant: user-guide/code-assistant.md
