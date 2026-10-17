@@ -79,8 +79,8 @@ Example:
 
 ```bash
 jarvis init --preset morning-digest-mac --force
-jarvis connect gdrive
-jarvis digest --fresh
+jarvis connect gdrive          # one OAuth covers Gmail / Calendar / Tasks
+jarvis digest --fresh          # generate and play your first briefing
 ```
 
 Per-preset deep dives: [morning digest](https://arkansasio.github.io/openjarvis/user-guide/morning-digest/) · [deep research](https://arkansasio.github.io/openjarvis/user-guide/deep-research/) · [code assistant](https://arkansasio.github.io/openjarvis/user-guide/code-assistant/) · [scheduled monitor](https://arkansasio.github.io/openjarvis/user-guide/scheduled-monitor/) · [chat simple](https://arkansasio.github.io/openjarvis/user-guide/chat-simple/) · or the full [quickstart guide](https://arkansasio.github.io/openjarvis/getting-started/quickstart/).
@@ -90,10 +90,17 @@ Per-preset deep dives: [morning digest](https://arkansasio.github.io/openjarvis/
 Skills teach agents how to better use tools and improve their reasoning. Every skill is a tool — agents discover them from a catalog and invoke them on demand.
 
 ```bash
+# Install skills from public sources
 jarvis skill install hermes:arxiv
 jarvis skill sync hermes --category research
+
+# Use skills with any agent
 jarvis ask "Use the code-explainer skill to explain this Python code: for i in range(5): print(i*2)"
+
+# Optimize skills from your trace history
 jarvis optimize skills --policy dspy
+
+# Benchmark the impact
 jarvis bench skills --max-samples 5 --seeds 42
 ```
 
@@ -163,7 +170,7 @@ OpenJarvis is part of [Intelligence Per Watt](https://www.intelligence-per-watt.
 ```bibtex
 @misc{saadfalcon2026openjarvispersonalaipersonal,
       title={OpenJarvis: Personal AI, On Personal Devices},
-      author={Jon Saad-Falcon et al.},
+      author={Jon Saad-Falcon and Avanika Narayan and Robby Manihani and Tanvir Bhathal and Herumb Shandilya and Hakki Orhun Akengin and Gabriel Bo and Andrew Park and Matthew Hart and Caia Costello and Chuan Li and Christopher Ré and Azalia Mirhoseini},
       year={2026},
       eprint={2605.17172},
       archivePrefix={arXiv},
