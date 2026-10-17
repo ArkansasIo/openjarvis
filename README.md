@@ -134,6 +134,10 @@ Full documentation — including Docker deployment, cloud engines, development s
 - **X / Twitter:** [@OpenJarvisAI](https://x.com/OpenJarvisAI)
 - **Docs:** [open-jarvis.github.io/OpenJarvis](https://open-jarvis.github.io/OpenJarvis/)
 
+## Fork maintenance
+
+This fork includes a maintenance and validation checklist covering the Python package, Rust/PyO3 extension, frontend, desktop application, and local-first security boundaries: [Fork Maintenance Guide](docs/development/fork-maintenance.md).
+
 ## Contributing
 
 We welcome contributions! See the [Contributing Guide](CONTRIBUTING.md) for incentives, contribution types, and the PR process.
