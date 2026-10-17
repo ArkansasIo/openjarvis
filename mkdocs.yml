@@ -180,6 +180,7 @@ nav:
       - CLI: user-guide/cli.md
       - Pearl CLI: user-guide/pearl.md
       - Pearl Mining: user-guide/mining.md
+      - Pearl Mining on Apple Silicon: user-guide/mining-apple-silicon.md
       - Morning Digest: user-guide/morning-digest.md
       - Deep Research: user-guide/deep-research.md
       - Code Assistant: user-guide/code-assistant.md
